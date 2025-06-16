@@ -14,3 +14,10 @@ logging:
 inventory:
   message: Inventory service is running!
   data: inventory-response
+
+# Swagger-UI
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
