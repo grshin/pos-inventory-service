@@ -1,2 +1,16 @@
 server:
-  port: 8082
+  port: 8080
+
+spring:
+  application:
+    name: inventory-service
+
+# 로그 레벨 설정 (선택)
+logging:
+  level:
+    root: INFO
+
+# 테스트용 응답 메시지
+inventory:
+  message: Inventory service is running!
+  data: inventory-response
