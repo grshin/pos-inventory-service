@@ -14,14 +14,12 @@ java {
 }
 
 repositories {
-	mavenCentral()
-	flatDir {
-        dirs '../common/build/libs'  // common JAR 파일 위치
-    }
+    mavenLocal()        // 🔸 반드시 있어야 함
+    mavenCentral()
 }
 
 dependencies {
-	implementation name: 'common-0.0.1-SNAPSHOT'
+	implementation 'com.pos:common:0.0.1-SNAPSHOT'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
