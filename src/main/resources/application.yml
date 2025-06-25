@@ -1,9 +1,16 @@
 server:
-  port: 8082
+  port: 8080
 
 spring:
   application:
     name: inventory-service
+
+eureka:
+  client:
+    serviceUrl: # ✅ camelCase
+      defaultZone: http://eureka-server:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
 
 # 로그 레벨 설정 (선택)
 logging:

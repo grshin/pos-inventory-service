@@ -1,22 +1,17 @@
-# Build stage
 FROM gradle:8.4-jdk17 AS build
 
+ARG USERNAME
+ARG TOKEN
+
+ENV GPR_USER=$USERNAME
+ENV GPR_KEY=$TOKEN
+
 WORKDIR /app
+COPY . .
 
-COPY settings.gradle build.gradle gradle.properties gradle/ ./
-
-COPY pos-common ./pos-common
-COPY pos-order-service ./pos-order-service
-COPY pos-inventory-service ./pos-inventory-service
-COPY pos-api-gateway ./pos-api-gateway
-
-WORKDIR /app/pos-inventory-service
-RUN gradle bootJar --no-daemon
+RUN ./gradlew bootJar -Pgpr.user=$GPR_USER -Pgpr.key=$GPR_KEY --build-cache --parallel
 
 FROM eclipse-temurin:17-jre
-
 WORKDIR /app
-
-COPY --from=build /app/pos-inventory-service/build/libs/*.jar app.jar
-
+COPY --from=build /app/build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
